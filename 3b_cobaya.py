@@ -34,11 +34,11 @@ info = {
         },
     },
     "sampler": {
-        "mcmc": {
-            # This is basically the accuracy argument for polychord
-            #"nlive": 100,
-        },
-
+        "mcmc": { },
+#        "polychord": {
+#            # This is basically the accuracy argument for polychord
+#            "nlive": 100,
+#        },
     },
 }
 
@@ -58,3 +58,6 @@ s = anesthetic.samples.MCMCSamples(root="chains_3/cobaya_test", columns=["a", "b
 
 s.plot_2d(['a', 'b'])
 plt.show()
+
+# If polychord: Get Evicence
+#print(s.logZ())
