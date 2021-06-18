@@ -17,7 +17,7 @@ info = {
     "force": True,
     # The usual stuff
     "likelihood": {
-        "name_of_your_likelihood_here_does_not_matter": {
+        "myfunction": {
             "external": loglikelihood_function
         },
     }, 
@@ -34,9 +34,9 @@ info = {
         },
     },
     "sampler": {
-        "polychord": {
+        "mcmc": {
             # This is basically the accuracy argument for polychord
-            "nlive": 100,
+            #"nlive": 100,
         },
 
     },
@@ -50,9 +50,11 @@ full_info, sampler = run(info)
 # Load samples from file
 import anesthetic
 
-# Load nested samples from polychord
-anesthetic.samples.NestedSamples(root="chains_3/cobaya_test_polychord_raw/cobaya_test")
+# Load nested (polychord) samples from polychord
+#s = anesthetic.samples.NestedSamples(root="chains_3/cobaya_test_polychord_raw/cobaya_test")
 
-# Loading MCMC samples isn't that great yet
-anesthetic.samples.MCMCSamples(root="chains_3/cobaya_test")
+# Loading MCMC samples isn't that great yet but alright
+s = anesthetic.samples.MCMCSamples(root="chains_3/cobaya_test", columns=["a", "b", "chi2_prior_a", "chi2_prior_b", "chi2_myfunction", "logL"])
 
+s.plot_2d(['a', 'b'])
+plt.show()
